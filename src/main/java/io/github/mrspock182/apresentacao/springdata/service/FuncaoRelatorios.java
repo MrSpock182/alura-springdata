@@ -112,49 +112,41 @@ public class FuncaoRelatorios {
         System.out.println("Digite o nome");
         String nome = scanner.next();
 
-        List<Funcionario> funcionarios = repository.findAll(Specification
-                .where(SpecificationFuncionario.cargo(nome)));
+        if(nome.equalsIgnoreCase("NULL")) {
+            nome = null;
+        }
+
+        System.out.println("Digite o cpf");
+        String cpf = scanner.next();
+
+        if(cpf.equalsIgnoreCase("NULL")) {
+            cpf = null;
+        }
+
+        System.out.println("Digite o salario");
+        Double salario = scanner.nextDouble();
+
+        if(salario == 0) {
+            salario = null;
+        }
+
+        System.out.println("Digite a data de contracao");
+        String data = scanner.next();
+
+        LocalDate localDate;
+        if(data.equalsIgnoreCase("NULL")) {
+            localDate = null;
+        } else {
+            localDate = LocalDate.parse(data, formatter);
+        }
+
+        List<Funcionario> funcionarios = repository.findAll(
+                Specification.where(SpecificationFuncionario.nome(nome))
+                        .or(SpecificationFuncionario.cpf(cpf))
+                        .or(SpecificationFuncionario.salario(salario))
+                        .or(SpecificationFuncionario.dataContratacao(localDate)));
 
         funcionarios.forEach(System.out::println);
-
-//        System.out.println("Digite o nome");
-//        String nome = scanner.next();
-//
-//        if(nome.equalsIgnoreCase("NULL")) {
-//            nome = null;
-//        }
-//
-//        System.out.println("Digite o cpf");
-//        String cpf = scanner.next();
-//
-//        if(cpf.equalsIgnoreCase("NULL")) {
-//            cpf = null;
-//        }
-//
-//        System.out.println("Digite o salario");
-//        Double salario = scanner.nextDouble();
-//
-//        if(salario == 0) {
-//            salario = null;
-//        }
-//
-//        System.out.println("Digite a data de contracao");
-//        String data = scanner.next();
-//
-//        LocalDate localDate;
-//        if(data.equalsIgnoreCase("NULL")) {
-//            localDate = null;
-//        } else {
-//            localDate = LocalDate.parse(data, formatter);
-//        }
-//
-//        List<Funcionario> funcionarios = repository.findAll(
-//                Specification.where(SpecificationFuncionario.nome(nome))
-//                        .or(SpecificationFuncionario.cpf(cpf))
-//                        .or(SpecificationFuncionario.salario(salario))
-//                        .or(SpecificationFuncionario.dataContratacao(localDate)));
-//
-//        funcionarios.forEach(System.out::println);
     }
 
 }

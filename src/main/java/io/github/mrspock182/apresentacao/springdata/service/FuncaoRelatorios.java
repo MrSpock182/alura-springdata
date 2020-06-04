@@ -1,9 +1,11 @@
 package io.github.mrspock182.apresentacao.springdata.service;
 
 import io.github.mrspock182.apresentacao.springdata.domain.Funcionario;
+import io.github.mrspock182.apresentacao.springdata.domain.UnidadeTrabalho;
 import io.github.mrspock182.apresentacao.springdata.repository.FuncionarioRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.ProjectionFuncionario;
 import io.github.mrspock182.apresentacao.springdata.repository.SpecificationFuncionario;
+import io.github.mrspock182.apresentacao.springdata.repository.UnidadeTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @Service
@@ -23,6 +26,9 @@ public class FuncaoRelatorios {
     @Autowired
     private FuncionarioRepository repository;
 
+    @Autowired
+    private UnidadeTrabalhoRepository unidadeRepository;
+
     public void inicio(Scanner scanner) {
         while (system) {
             System.out.println("Qual função deseja executar?");
@@ -32,7 +38,8 @@ public class FuncaoRelatorios {
             System.out.println("4 - Pesquisa de Tempo na Empresa com Salario");
             System.out.println("5 - Pesquisa Dinamica");
             System.out.println("6 - Pesquisa Funcionario por cargo");
-            System.out.println("7 - Sair");
+            System.out.println("7 - Funcionarios por unidade");
+            System.out.println("8 - Sair");
 
             Integer function = scanner.nextInt();
 
@@ -61,11 +68,24 @@ public class FuncaoRelatorios {
                     System.out.println("Pesquisa Dinamica");
                     cargoFuncao(scanner);
                     break;
+                case 7:
+                    System.out.println("Funcionarios por Unidade");
+                    funcionariosPorUnidade(scanner);
+                    break;
                 default:
                     system = false;
                     break;
             }
         }
+    }
+
+    private void funcionariosPorUnidade(Scanner scanner) {
+        System.out.println("Informe a unidade");
+        Integer id = scanner.nextInt();
+
+        UnidadeTrabalho unidadeTrabalho = unidadeRepository.all(id);
+        System.out.println("Unidade: " + unidadeTrabalho.getDescricao());
+        unidadeTrabalho.getFuncionarios().forEach(f -> System.out.println("Funcionario: " + f.getNome()));
     }
 
     private void relatorioSalario() {

@@ -2,8 +2,10 @@ package io.github.mrspock182.apresentacao.springdata.service;
 
 import io.github.mrspock182.apresentacao.springdata.domain.Cargo;
 import io.github.mrspock182.apresentacao.springdata.domain.Funcionario;
+import io.github.mrspock182.apresentacao.springdata.domain.UnidadeTrabalho;
 import io.github.mrspock182.apresentacao.springdata.repository.CargoRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.FuncionarioRepository;
+import io.github.mrspock182.apresentacao.springdata.repository.UnidadeTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -28,6 +32,9 @@ public class FuncaoFuncionario {
 
     @Autowired
     private FuncionarioRepository repository;
+
+    @Autowired
+    private UnidadeTrabalhoRepository unidadeRepository;
 
     public void inicio(Scanner scanner) {
         while (system) {
@@ -80,6 +87,8 @@ public class FuncaoFuncionario {
         System.out.println("Digite o cargoId");
         Integer cargoId = scanner.nextInt();
 
+        List<UnidadeTrabalho> unidades = unidade(scanner);
+
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(nome);
         funcionario.setCpf(cpf);
@@ -87,9 +96,29 @@ public class FuncaoFuncionario {
         funcionario.setDataContratacao(LocalDate.parse(dataContratacao, formatter));
         Optional<Cargo> cargo = cargoRepository.findById(cargoId);
         funcionario.setCargo(cargo.get());
+        funcionario.setUnidadeTrabalhos(unidades);
 
         repository.save(funcionario);
         System.out.println("Salvo");
+    }
+
+    private List<UnidadeTrabalho> unidade(Scanner scanner) {
+        Boolean isTrue = true;
+        List<UnidadeTrabalho> unidades = new ArrayList<>();
+
+        while (isTrue) {
+            System.out.println("Digite o unidadeId (Para sair digite 0)");
+            Integer unidadeId = scanner.nextInt();
+
+            if(unidadeId != 0) {
+                Optional<UnidadeTrabalho> unidade = unidadeRepository.findById(unidadeId);
+                unidades.add(unidade.get());
+            } else {
+                isTrue = false;
+            }
+        }
+
+        return unidades;
     }
 
     private void alterar(Scanner scanner) {

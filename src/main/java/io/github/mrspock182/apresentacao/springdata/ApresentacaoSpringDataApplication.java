@@ -3,6 +3,7 @@ package io.github.mrspock182.apresentacao.springdata;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoCargo;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoFuncionario;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoRelatorios;
+import io.github.mrspock182.apresentacao.springdata.service.FuncaoUnidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,9 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 	private FuncaoCargo funcaoCargo;
 
 	@Autowired
+	private FuncaoUnidade funcaoUnidade;
+
+	@Autowired
 	private FuncaoRelatorios funcaoRelatorios;
 
 	@Autowired
@@ -39,8 +43,9 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 			System.out.println("Qual função deseja executar?");
 			System.out.println("1 - Funcionario");
 			System.out.println("2 - Cargo");
-			System.out.println("3 - Relatorios");
-			System.out.println("4 - Sair");
+			System.out.println("3 - Unidade");
+			System.out.println("4 - Relatorios");
+			System.out.println("5 - Sair");
 
 			Integer function = scanner.nextInt();
 
@@ -52,6 +57,9 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 					funcaoCargo.inicio(scanner);
 					break;
 				case 3:
+					funcaoUnidade.inicio(scanner);
+					break;
+				case 4:
 					funcaoRelatorios.inicio(scanner);
 					break;
 				default:

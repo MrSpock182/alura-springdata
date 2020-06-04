@@ -1,13 +1,14 @@
 package io.github.mrspock182.apresentacao.springdata.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "cargos")
-public class Cargo {
+public class Cargo implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String funcao;
     @OneToMany(mappedBy="cargo")

@@ -1,11 +1,16 @@
 package io.github.mrspock182.apresentacao.springdata.domian;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "funcionarios")
-public class Funcionario {
+public class Funcionario implements Serializable {
     @Id
     @Column(name = "idFuncionario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +22,16 @@ public class Funcionario {
     @Column(name = "salarioFuncionario")
     private Double salario;
     private LocalDate dataContratacao;
+    @ManyToOne
+    @JoinColumn(name="cargo_id", nullable=false)
+    private Cargo cargo;
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "funcionarios_unidades",
+            joinColumns = {@JoinColumn(name = "fk_funcionario")},
+            inverseJoinColumns = {@JoinColumn(name = "fk_unidade")}
+    )
+    private List<UnidadeTrabalho> unidadeTrabalhos;
 
     public Integer getId() {
         return id;
@@ -56,5 +71,31 @@ public class Funcionario {
 
     public void setDataContratacao(LocalDate dataContratacao) {
         this.dataContratacao = dataContratacao;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public List<UnidadeTrabalho> getUnidadeTrabalhos() {
+        return unidadeTrabalhos;
+    }
+
+    public void setUnidadeTrabalhos(List<UnidadeTrabalho> unidadeTrabalhos) {
+        this.unidadeTrabalhos = unidadeTrabalhos;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario: " + "id:" + id +
+                "| nome:'" + nome +
+                "| cpf:" + cpf +
+                "| salario:" + salario +
+                "| dataContratacao:" + dataContratacao +
+                "| cargo:" + cargo.getFuncao();
     }
 }

@@ -26,7 +26,7 @@ public class Funcionario implements Serializable {
     @JoinColumn(name="cargo_id", nullable=false)
     private Cargo cargo;
     @Fetch(FetchMode.SELECT)
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "funcionarios_unidades",
             joinColumns = {@JoinColumn(name = "fk_funcionario")},
             inverseJoinColumns = {@JoinColumn(name = "fk_unidade")}

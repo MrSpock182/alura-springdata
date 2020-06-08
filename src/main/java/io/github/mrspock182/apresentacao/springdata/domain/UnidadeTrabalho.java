@@ -13,7 +13,7 @@ public class UnidadeTrabalho implements Serializable {
     private Integer id;
     private String descricao;
     private String endereco;
-    @ManyToMany(mappedBy = "unidadeTrabalhos", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "unidadeTrabalhos", fetch = FetchType.EAGER)
     private List<Funcionario> funcionarios;
 
     public Integer getId() {

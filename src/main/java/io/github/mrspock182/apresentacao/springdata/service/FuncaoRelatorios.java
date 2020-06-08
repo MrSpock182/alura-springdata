@@ -83,7 +83,8 @@ public class FuncaoRelatorios {
         System.out.println("Informe a unidade");
         Integer id = scanner.nextInt();
 
-        UnidadeTrabalho unidadeTrabalho = unidadeRepository.all(id);
+        Optional<UnidadeTrabalho> optional = unidadeRepository.findById(id);
+        UnidadeTrabalho unidadeTrabalho = optional.get();
         System.out.println("Unidade: " + unidadeTrabalho.getDescricao());
         unidadeTrabalho.getFuncionarios().forEach(f -> System.out.println("Funcionario: " + f.getNome()));
     }

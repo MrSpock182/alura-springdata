@@ -3,6 +3,7 @@ package io.github.mrspock182.apresentacao.springdata.repository;
 import io.github.mrspock182.apresentacao.springdata.domian.Funcionario;
 import io.github.mrspock182.apresentacao.springdata.projection.ProjectionFuncionario;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>,
+        JpaSpecificationExecutor<Funcionario> {
     List<Funcionario> findBySalarioGreaterThan(Double salario);
 
     List<Funcionario> findByCargoFuncao(String funcao);

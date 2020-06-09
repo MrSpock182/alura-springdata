@@ -118,7 +118,7 @@ public class FuncaoRelatorios {
 
     private void relatorioSalario() {
         List<ProjectionFuncionario> list = repository.all();
-        list.forEach(f -> System.out.println("Funcionario: id:" + f.getId() + " | nome:"
+        list.forEach(f -> System.out.println("Funcionario: id:" + f.getId_funcionario() + " | nome:"
                 + f.getNome_funcionario() + " | salario:" + f.getSalario_funcionario()));
     }
 

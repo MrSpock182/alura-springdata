@@ -23,7 +23,8 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
             " f.salario >= :salario")
     List<Funcionario> tempoCasaSalario(LocalDate dataContratacao, Double salario);
 
-    @Query(value = "SELECT f.id, f.nome_funcionario, f.salario_funcionario FROM funcionarios f",
+    @Query(value = "SELECT f.id_funcionario, f.nome_funcionario, f.salario_funcionario" +
+            " FROM funcionarios f ORDER BY f.salario_funcionario DESC",
             nativeQuery = true)
     List<ProjectionFuncionario> all();
 }

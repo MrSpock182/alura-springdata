@@ -7,6 +7,7 @@ import io.github.mrspock182.apresentacao.springdata.repository.CargoRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.FuncionarioRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.UnidadeTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -150,7 +151,9 @@ public class FuncaoFuncionario {
     }
 
     private void visualizar(Scanner scanner) {
-        List<Funcionario> funcionarios = repository.findAll();
+        Sort orderNameInverso = Sort.by("nome").descending();
+
+        List<Funcionario> funcionarios = repository.findAll(orderNameInverso);
         funcionarios.forEach(System.out::println);
     }
 

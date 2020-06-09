@@ -1,7 +1,7 @@
 package io.github.mrspock182.apresentacao.springdata.projection;
 
 public interface ProjectionFuncionario {
-    Integer getId();
+    Integer getId_funcionario();
 
     String getNome_funcionario();
 

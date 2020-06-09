@@ -2,6 +2,7 @@ package io.github.mrspock182.apresentacao.springdata.service;
 
 import io.github.mrspock182.apresentacao.springdata.domian.Funcionario;
 import io.github.mrspock182.apresentacao.springdata.domian.UnidadeTrabalho;
+import io.github.mrspock182.apresentacao.springdata.projection.ProjectionFuncionario;
 import io.github.mrspock182.apresentacao.springdata.repository.FuncionarioRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.UnidadeTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class FuncaoRelatorios {
             System.out.println("3 - Pesquisa de Tempo na Empresa com Salario");
             System.out.println("4 - Pesquisa Funcionario por cargo");
             System.out.println("5 - Funcionarios por unidade");
-            System.out.println("6 - Sair");
+            System.out.println("6 - Funcionarios por salario");
+            System.out.println("7 - Sair");
 
             Integer function = scanner.nextInt();
 
@@ -58,6 +60,10 @@ public class FuncaoRelatorios {
                 case 5:
                     System.out.println("Funcionarios por Unidade");
                     funcionariosPorUnidade(scanner);
+                    break;
+                case 6:
+                    System.out.println("Funcionarios por Salario");
+                    relatorioSalario();
                     break;
                 default:
                     system = false;
@@ -108,6 +114,12 @@ public class FuncaoRelatorios {
 
         List<Funcionario> funcionarios = repository.findByCargoFuncao(cargo);
         funcionarios.forEach(System.out::println);
+    }
+
+    private void relatorioSalario() {
+        List<ProjectionFuncionario> list = repository.all();
+        list.forEach(f -> System.out.println("Funcionario: id:" + f.getId() + " | nome:"
+                + f.getNome_funcionario() + " | salario:" + f.getSalario_funcionario()));
     }
 
 }

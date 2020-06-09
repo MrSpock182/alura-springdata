@@ -1,6 +1,7 @@
 package io.github.mrspock182.apresentacao.springdata.repository;
 
 import io.github.mrspock182.apresentacao.springdata.domian.Funcionario;
+import io.github.mrspock182.apresentacao.springdata.projection.ProjectionFuncionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,4 +22,8 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
     @Query(value = "SELECT f FROM Funcionario f WHERE f.dataContratacao >= :dataContratacao AND" +
             " f.salario >= :salario")
     List<Funcionario> tempoCasaSalario(LocalDate dataContratacao, Double salario);
+
+    @Query(value = "SELECT f.id, f.nome_funcionario, f.salario_funcionario FROM funcionarios f",
+            nativeQuery = true)
+    List<ProjectionFuncionario> all();
 }

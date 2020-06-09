@@ -1,5 +1,6 @@
 package io.github.mrspock182.apresentacao.springdata.service;
 
+import io.github.mrspock182.apresentacao.springdata.custompage.CustomPage;
 import io.github.mrspock182.apresentacao.springdata.domian.Cargo;
 import io.github.mrspock182.apresentacao.springdata.domian.Funcionario;
 import io.github.mrspock182.apresentacao.springdata.domian.UnidadeTrabalho;
@@ -7,6 +8,9 @@ import io.github.mrspock182.apresentacao.springdata.repository.CargoRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.FuncionarioRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.UnidadeTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -153,8 +157,23 @@ public class FuncaoFuncionario {
     private void visualizar(Scanner scanner) {
         Sort orderNameInverso = Sort.by("nome").descending();
 
-        List<Funcionario> funcionarios = repository.findAll(orderNameInverso);
-        funcionarios.forEach(System.out::println);
+        System.out.println("Qual pagina");
+        Integer page = scanner.nextInt();
+
+        Pageable pageable = PageRequest.of(page, 5, orderNameInverso);
+
+        CustomPage<Funcionario> custom = new CustomPage<>();
+        Page<Funcionario> funcionarios = repository.findAll(pageable);
+        custom.setPage(funcionarios.getNumber());
+        custom.setTotal(funcionarios.getTotalPages() - 1);
+        custom.setSize(funcionarios.getSize());
+        custom.setContent(funcionarios.getContent());
+
+
+        System.out.println(funcionarios);
+        System.out.println("Pagina Atual: " + custom.getPage());
+        System.out.println("Total Paginas: " + custom.getTotal());
+        custom.getContent().forEach(System.out::println);
     }
 
     private void deletar(Scanner scanner) {

@@ -1,6 +1,5 @@
 package io.github.mrspock182.apresentacao.springdata;
 
-import io.github.mrspock182.apresentacao.springdata.domian.Cargo;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoCargo;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoFuncionario;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoRelatorios;

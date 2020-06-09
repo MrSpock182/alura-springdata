@@ -34,7 +34,7 @@ public class FuncaoRelatorios {
             System.out.println("3 - Pesquisa de Tempo na Empresa com Salario");
             System.out.println("4 - Pesquisa Funcionario por cargo");
             System.out.println("5 - Funcionarios por unidade");
-            System.out.println("8 - Sair");
+            System.out.println("6 - Sair");
 
             Integer function = scanner.nextInt();
 

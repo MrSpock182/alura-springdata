@@ -154,15 +154,7 @@ public class FuncaoFuncionario {
     }
 
     private void visualizar(Scanner scanner) {
-        System.out.println("Qual pagina");
-        Integer page = scanner.nextInt();
-
-        Pageable pageable = PageRequest.of(page, 5, Sort.by("nome"));
-
-        Page<Funcionario> funcionarios = repository.findAll(pageable);
-        System.out.println(funcionarios);
-        System.out.println("Pagina Atual: " + funcionarios.getNumber());
-        System.out.println("Total Paginas: " + (funcionarios.getTotalPages() - 1));
+        List<Funcionario> funcionarios = repository.findAll();
         funcionarios.forEach(System.out::println);
     }
 

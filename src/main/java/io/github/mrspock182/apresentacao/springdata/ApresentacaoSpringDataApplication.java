@@ -3,6 +3,7 @@ package io.github.mrspock182.apresentacao.springdata;
 import io.github.mrspock182.apresentacao.springdata.domian.Cargo;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoCargo;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoFuncionario;
+import io.github.mrspock182.apresentacao.springdata.service.FuncaoRelatorios;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoUnidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +28,9 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 	@Autowired
 	private FuncaoFuncionario funcaoFuncionario;
 
+	@Autowired
+	private FuncaoRelatorios funcaoRelatorios;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ApresentacaoSpringDataApplication.class, args);
 	}
@@ -40,7 +44,8 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 			System.out.println("1 - Funcionario");
 			System.out.println("2 - Cargo");
 			System.out.println("3 - Unidade");
-			System.out.println("4 - Sair");
+			System.out.println("4 - Relatorios");
+			System.out.println("5 - Sair");
 
 			Integer function = scanner.nextInt();
 
@@ -53,6 +58,9 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 					break;
 				case 3:
 					funcaoUnidade.inicio(scanner);
+					break;
+				case 4:
+					funcaoRelatorios.inicio(scanner);
 					break;
 				default:
 					System.out.println("Finalizando");

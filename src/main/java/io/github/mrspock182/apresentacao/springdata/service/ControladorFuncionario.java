@@ -5,7 +5,7 @@ import io.github.mrspock182.apresentacao.springdata.domian.Funcionario;
 import io.github.mrspock182.apresentacao.springdata.domian.UnidadeTrabalho;
 import io.github.mrspock182.apresentacao.springdata.repository.CargoRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.FuncionarioRepository;
-import io.github.mrspock182.apresentacao.springdata.repository.UnidadeTrabalhoRepository;
+import io.github.mrspock182.apresentacao.springdata.repository.UnidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 @Service
-public class FuncaoFuncionario {
+public class ControladorFuncionario {
 
     private Boolean system = true;
 
@@ -30,11 +30,11 @@ public class FuncaoFuncionario {
     private FuncionarioRepository repository;
 
     @Autowired
-    private UnidadeTrabalhoRepository unidadeRepository;
+    private UnidadeRepository unidadeRepository;
 
     public void inicio(Scanner scanner) {
         while (system) {
-            System.out.println("1 - Cadastrar funcionario");
+            System.out.println("1 - Inserir funcionario");
             System.out.println("2 - Alterar funcionario");
             System.out.println("3 - Visualizar funcionario");
             System.out.println("4 - Deletar funcionario");
@@ -44,7 +44,7 @@ public class FuncaoFuncionario {
             switch (function) {
                 case 1:
                     System.out.println("Cadastrar");
-                    cadastrar(scanner);
+                    inserir(scanner);
                     break;
                 case 2:
                     System.out.println("Alterar");
@@ -67,7 +67,7 @@ public class FuncaoFuncionario {
 
     }
 
-    private void cadastrar(Scanner scanner) {
+    private void inserir(Scanner scanner) {
         System.out.println("Digite o nome");
         String nome = scanner.next();
 
@@ -150,7 +150,7 @@ public class FuncaoFuncionario {
     }
 
     private void visualizar(Scanner scanner) {
-        List<Funcionario> funcionarios = repository.findAll();
+        Iterable<Funcionario> funcionarios = repository.findAll();
         funcionarios.forEach(System.out::println);
     }
 

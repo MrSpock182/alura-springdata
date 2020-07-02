@@ -1,9 +1,9 @@
 package io.github.mrspock182.apresentacao.springdata;
 
-import io.github.mrspock182.apresentacao.springdata.service.FuncaoCargo;
-import io.github.mrspock182.apresentacao.springdata.service.FuncaoFuncionario;
+import io.github.mrspock182.apresentacao.springdata.service.ControladorCargo;
+import io.github.mrspock182.apresentacao.springdata.service.ControladorFuncionario;
+import io.github.mrspock182.apresentacao.springdata.service.ControladorUnidade;
 import io.github.mrspock182.apresentacao.springdata.service.FuncaoRelatorios;
-import io.github.mrspock182.apresentacao.springdata.service.FuncaoUnidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,13 +19,13 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 	private Boolean system = true;
 
 	@Autowired
-	private FuncaoCargo funcaoCargo;
+	private ControladorCargo funcaoCargo;
 
 	@Autowired
-	private FuncaoUnidade funcaoUnidade;
+	private ControladorUnidade funcaoUnidade;
 
 	@Autowired
-	private FuncaoFuncionario funcaoFuncionario;
+	private ControladorFuncionario funcaoFuncionario;
 
 	@Autowired
 	private FuncaoRelatorios funcaoRelatorios;

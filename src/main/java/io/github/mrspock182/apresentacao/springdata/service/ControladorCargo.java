@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class FuncaoCargo {
+public class ControladorCargo {
 
     private Boolean system = true;
 
@@ -28,7 +28,7 @@ public class FuncaoCargo {
             switch (function) {
                 case 1:
                     System.out.println("Cadastrar");
-                    cadastrar(scanner);
+                    inserir(scanner);
                     break;
                 case 2:
                     System.out.println("Alterar");
@@ -50,7 +50,7 @@ public class FuncaoCargo {
         }
     }
 
-    private void cadastrar(Scanner scanner) {
+    private void inserir(Scanner scanner) {
         System.out.println("Nome do Cargo");
         String nomeCargo = scanner.next();
 
@@ -78,7 +78,7 @@ public class FuncaoCargo {
     }
 
     private void visualizar() {
-        List<Cargo> cargos = repository.findAll();
+        Iterable<Cargo> cargos = repository.findAll();
         cargos.forEach(System.out::println);
     }
 

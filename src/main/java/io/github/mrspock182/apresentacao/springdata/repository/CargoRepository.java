@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CargoRepository extends CrudRepository<Cargo, Integer> {
+    Cargo findByFuncao(String nome);
 }

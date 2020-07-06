@@ -1,9 +1,9 @@
 package io.github.mrspock182.apresentacao.springdata;
 
-import io.github.mrspock182.apresentacao.springdata.service.FuncaoCargo;
-import io.github.mrspock182.apresentacao.springdata.service.FuncaoFuncionario;
-import io.github.mrspock182.apresentacao.springdata.service.FuncaoRelatorios;
-import io.github.mrspock182.apresentacao.springdata.service.FuncaoUnidade;
+import io.github.mrspock182.apresentacao.springdata.service.ControladorCargo;
+import io.github.mrspock182.apresentacao.springdata.service.ControladorFuncionario;
+import io.github.mrspock182.apresentacao.springdata.service.ControladorUnidade;
+import io.github.mrspock182.apresentacao.springdata.service.ControladorRelatorios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,16 +19,16 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 	private Boolean system = true;
 
 	@Autowired
-	private FuncaoCargo funcaoCargo;
+	private ControladorCargo controladorCargo;
 
 	@Autowired
-	private FuncaoUnidade funcaoUnidade;
+	private ControladorUnidade controladorUnidade;
 
 	@Autowired
-	private FuncaoFuncionario funcaoFuncionario;
+	private ControladorFuncionario controladorFuncionario;
 
 	@Autowired
-	private FuncaoRelatorios funcaoRelatorios;
+	private ControladorRelatorios controladorRelatorios;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApresentacaoSpringDataApplication.class, args);
@@ -40,9 +40,9 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 
 		while (system) {
 			System.out.println("Qual função deseja executar?");
-			System.out.println("1 - Funcionario");
-			System.out.println("2 - Cargo");
-			System.out.println("3 - Unidade");
+			System.out.println("1 - Cargo");
+			System.out.println("2 - Unidade");
+			System.out.println("3 - Funcionario");
 			System.out.println("4 - Relatorios");
 			System.out.println("5 - Sair");
 
@@ -50,16 +50,16 @@ public class ApresentacaoSpringDataApplication implements CommandLineRunner {
 
 			switch (function) {
 				case 1:
-					funcaoFuncionario.inicio(scanner);
+					controladorCargo.inicio(scanner);
 					break;
 				case 2:
-					funcaoCargo.inicio(scanner);
+					controladorUnidade.inicio(scanner);
 					break;
 				case 3:
-					funcaoUnidade.inicio(scanner);
+					controladorFuncionario.inicio(scanner);
 					break;
 				case 4:
-					funcaoRelatorios.inicio(scanner);
+					controladorRelatorios.inicio(scanner);
 					break;
 				default:
 					System.out.println("Finalizando");

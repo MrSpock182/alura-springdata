@@ -34,7 +34,8 @@ public class ControladorRelatorios {
             System.out.println("3 - Pesquisa Funcionário por cargo:");
             System.out.println("4 - Pesquisa Funcionário por nome, salário e contratação:");
             System.out.println("5 - Pesquisa Funcionário por tempo de empresa:");
-            System.out.println("6 - Sair");
+            System.out.println("6 - Pesquisa Funcionário salário");
+            System.out.println("7 - Sair");
 
             Integer function = scanner.nextInt();
 
@@ -60,8 +61,8 @@ public class ControladorRelatorios {
                     pesquisaTempoEmpresa(scanner);
                     break;
                 case 6:
-                    System.out.println("Funcionarios por Salario");
-                    relatorioSalario();
+                    System.out.println("Pesquisa Funcionário salário");
+                    pesquisaFuncionarioSalario();
                     break;
                 default:
                     system = false;
@@ -116,8 +117,8 @@ public class ControladorRelatorios {
         funcionarios.forEach(System.out::println);
     }
 
-    private void relatorioSalario() {
-        List<ProjectionFuncionario> list = repository.pesquisaSalario();
+    private void pesquisaFuncionarioSalario() {
+        List<ProjectionFuncionario> list = repository.pesquisaFuncionarioSalario();
         list.forEach(f -> System.out.println("Funcionario: id:" + f.getId_funcionario() + " | nome:"
                 + f.getNome_funcionario() + " | salario:" + f.getSalario_funcionario()));
     }

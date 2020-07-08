@@ -7,6 +7,9 @@ import io.github.mrspock182.apresentacao.springdata.repository.CargoRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.FuncionarioRepository;
 import io.github.mrspock182.apresentacao.springdata.repository.UnidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -107,7 +110,7 @@ public class ControladorFuncionario {
             System.out.println("Digite o unidadeId (Para sair digite 0)");
             Integer unidadeId = scanner.nextInt();
 
-            if(unidadeId != 0) {
+            if (unidadeId != 0) {
                 Optional<UnidadeTrabalho> unidade = unidadeRepository.findById(unidadeId);
                 unidades.add(unidade.get());
             } else {
@@ -151,7 +154,15 @@ public class ControladorFuncionario {
     }
 
     private void visualizar(Scanner scanner) {
-        Iterable<Funcionario> funcionarios = repository.findAll();
+        System.out.println("Qual página deseja visualizar?");
+        Integer page = scanner.nextInt();
+
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "salario"));
+        Page<Funcionario> funcionarios = repository.findAll(pageable);
+
+        System.out.println(funcionarios);
+        System.out.println("Pagina Atual: " + funcionarios.getNumber());
+        System.out.println("Total Paginas: " + (funcionarios.getTotalPages() - 1));
         funcionarios.forEach(System.out::println);
     }
 

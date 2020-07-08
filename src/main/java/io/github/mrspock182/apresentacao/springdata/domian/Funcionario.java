@@ -22,6 +22,7 @@ public class Funcionario implements Serializable {
     @Column(name = "salarioFuncionario")
     private Double salario;
     private LocalDate dataContratacao;
+    private Boolean altoSalario;
     @ManyToOne
     @JoinColumn(name="cargo_id", nullable=false)
     private Cargo cargo;
@@ -65,6 +66,14 @@ public class Funcionario implements Serializable {
         this.salario = salario;
     }
 
+    public Boolean getAltoSalario() {
+        return altoSalario;
+    }
+
+    public void setAltoSalario(Boolean altoSalario) {
+        this.altoSalario = altoSalario;
+    }
+
     public LocalDate getDataContratacao() {
         return dataContratacao;
     }
@@ -91,11 +100,15 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "Funcionario: " + "id:" + id +
-                "| nome:'" + nome +
-                "| cpf:" + cpf +
-                "| salario:" + salario +
-                "| dataContratacao:" + dataContratacao +
-                "| cargo:" + cargo.getFuncao();
+        return "Funcionario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", salario=" + salario +
+                ", dataContratacao=" + dataContratacao +
+                ", altoSalario=" + altoSalario +
+                ", cargo=" + cargo +
+                ", unidadeTrabalhos=" + unidadeTrabalhos +
+                '}';
     }
 }

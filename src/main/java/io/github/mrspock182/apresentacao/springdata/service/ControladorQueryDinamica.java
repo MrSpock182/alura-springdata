@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class FuncaoQueryDinamica {
+public class ControladorQueryDinamica {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
